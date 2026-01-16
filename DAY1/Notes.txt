@@ -1,0 +1,17 @@
+
+
+Writing Markup in JSX
+
+1> Return a single root element
+2>Close all the tags
+3>camelCase most of the things
+4> JS reserve words can't be written as HTML attributes
+
+
+React Fragement
+When we dont need extra div when we group a list of children we use React Fragement.
+<>   </>
+
+
+JSX With Curly Braces
+If We write something in { } it is treated as Pure JS.
