@@ -1,0 +1,94 @@
+
+
+Handling Click Events like click dblclick  mousedown / mouseup
+
+Event Listeners 
+
+<button onClick={sayHello}>Click me </button>
+<p onDoubleClick={sayBye}>Event Listeners</p>
+
+
+Handling Non-click Events
+like mousemove,mouseenter / mouseleave,mouseover / mouseout,
+
+
+Event Object -> When event trigger event object also come
+
+About form Submission how we can use preventDefault be using event.
+
+
+
+// State in React (Apne Aap pe Object hn)
+
+Jb bhi hamara component means function ek baar render ho jata h or agr function or components m kuch changes krte h or aate h to vo ui or DOM m render nhi kra pata isliye we use state in React.
+
+State ka kaam agr component m kuch changes hore h (we are defining some variable agr usme kuch changes hote h to hamara component render ho )
+
+like ex - normal variables or (Props are immutable)if in props if there is changes the component doesn't render.
+
+
+// Hooks
+Shuruwat m React m component built in the form of class component. (Isme kuch  features hote the jo functional m exist nhi krte the)
+Ab component built in the form of functional component.
+
+(to add some features of class component in functional component  the concept come Hooks like State ).
+
+Major Hook -> UseState
+
+
+// 1st Hook
+UseState->Means agr variable m kuch changes aaye to react ko component ko rerender krna pdhta h.
+It returns an array with exactly two values.
+
+count = first one current state
+setCount = second one is Set function that update the state to different value and trigger a render.
+set function is most imp because only it can rerender component.
+
+
+Rerender alg trike se work krta h using closure.
+
+
+Callback in setFunc or Update function
+
+1> If new value state is depend in old state then we will update by callback 
+
+// Do like this
+function increaseCount(){
+    setCount((oldVal)=>{
+        return oldVal + 1;
+
+    });
+    setCount((oldVal)=>{
+       return oldVal+1;
+    })
+}
+
+
+// Not  like this
+function increaseCount(){
+    setCount(oldVal+1);
+    setCount(oldVal+1);
+}
+
+
+2> If new value state is not depend  in old state then we will update normally
+
+setCount(25); // Baar Baar component render nhi hoga bcz state ki value m change nhi aara.
+
+
+Component tbh hi rerender hoga jb state ki value m kuch changes aayinge.
+
+
+
+function start(){
+    console.log("game started");
+    return Math.random();
+}
+
+let [count,setCount] = UseState(start()); // Initialization
+console.log("Component was rendered);
+
+// so in this start() will executed in every render
+so we use like this not execute the function in useState
+let [count,setCount] = UseState(start); 
+
