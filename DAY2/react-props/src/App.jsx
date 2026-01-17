@@ -1,6 +1,5 @@
-import "./App.jsx";
+import "./App.css";
 import ProductTab from "../Components/ProductTab.jsx";
-
 function App(){
   return(
 <>

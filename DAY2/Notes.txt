@@ -1,0 +1,34 @@
+
+
+// First Learn Day1
+
+ Notes
+
+React Props
+Props are the information that you pass to a JSX tag
+
+
+Like  In function we Pass value in Parameters while calling
+same as in Props.
+
+<Product  title="phone" price="10k"/>
+<Product  title="laptop" price="40K"/>
+<Product  title="PC" price="80K"/>
+
+Passing Array To Props
+features={["fast","reliable"]}
+
+Passing Objects To Props
+features={{a:"fast",b:"reliable"}}
+
+
+Conditionals 
+Adding Elements on the Basis of some Condition
+{ price>=1000 ? <p> Discount : 5% </p> : null }
+{ price>=1000 && <p> Discount : 5%</p> }
+
+
+Dynamic Component Styling
+{ price>=1000 ? <p> Discount : 5% </p> : null }
+
+
