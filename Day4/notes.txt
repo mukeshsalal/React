@@ -1,0 +1,89 @@
+
+
+
+How to use Object in State.
+
+ function updateBlue(){
+        setMoves((moves)=>{
+        // Bcz in Object address does not change so we have to spread this.
+           return {...moves,blue:moves.blue+1};
+        });
+    }
+
+
+How to use Array in State.
+
+  let [moves,setMoves] = useState({blue:0,yellow:0,green:0});
+
+   let [arr,setArr] = useState(["no moves"]);
+
+    function updateBlue(){
+        // moves.blue +=1;
+        setMoves((moves)=>{
+        // Bcz in Object address does not change so we have to spread this.
+           return {...moves,blue:moves.blue+1};
+        });
+       
+        setArr((arr)=>{
+            return [...arr,"blue moves"];
+        })
+        
+        console.log(arr);
+      
+    }
+
+
+
+-------------------------------------------
+
+// IMP Below Written Ex
+// To add in Array we use spread operator
+// To delete in Array we use filter method
+// To update All element in Array we use map method
+// To update One element in Array we use map method
+
+
+
+// To add in Array we use spread operator
+
+  setTodos((prevTodo)=>{
+        // console.log(event.target[0].value);
+        return [...prevTodo,{task:inputVal,id:uuid4()}];
+        });
+
+
+// To delete in Array we use filter method
+
+    setTodos((prevTodo)=>{
+            return prevTodo.filter((todo)=>todo.id!=id);
+        });
+
+
+// To update All element in Array
+
+   function UpperCaseAll(){
+
+        setTodos((prevTodos)=>{
+        return prevTodos.map((todo)=>{
+                return {
+                    ...todo,task:todo.task.toUpperCase()
+                }
+            });
+        });
+    }
+
+
+// To update One element in Array we use map method
+
+ setTodos((prevTodos)=>{
+        return prevTodos.map((todo)=>{
+            if(todo.id==id){
+                return{
+                    ...todo,task:todo.task.toUpperCase()
+                }
+            }else{
+                return todo;
+            }
+
+            });
+        });
