@@ -6,8 +6,10 @@ import { v4 as uuid4} from "uuid";
 export default function TodoList(){
 
 
-    let [todos,setTodos] = useState([{task:"sampleTask",id:uuid4()}]);
+    let [todos,setTodos] = useState([{task:"sampleTask",id:uuid4(),done:false} ]);
     let [inputVal,setInputVal] = useState("");
+    let [done,setDone] = useState(false);
+
 
     function HandleInputValue(event){
         console.log(event.target.value);
@@ -60,6 +62,33 @@ export default function TodoList(){
     }
     }
 
+    function Done(id){ 
+      setTodos((prevTodos)=>{
+        return prevTodos.map((todo)=>{
+           if(todo.id==id){
+           return {...todo,done:true} 
+           }
+           else{
+            return todo;
+           }  
+      })
+
+      })
+
+}
+
+    function AllDone(id){ 
+      setTodos((prevTodos)=>{
+        return prevTodos.map((todo)=>{
+           return {...todo,done:true}  
+      })
+
+      })
+      
+}
+
+ 
+
 
     return(
 
@@ -78,11 +107,15 @@ export default function TodoList(){
 
     {todos.map((todo)=>(
         <li key={todo.id}>
-          <span>{todo.task}</span>
+         {todo.done ?<p style={{textDecoration:"line-Through"}}>{todo.task}</p>:<p>{todo.task}</p>}
           &nbsp; &nbsp; &nbsp;
           <button onClick={()=>deleteTask(todo.id)}>Delete</button>
           &nbsp;
+
           <button onClick={()=>UpperCaseParticularTask(todo.id)}>UpperCase</button>
+           &nbsp;
+           &nbsp;
+          <button onClick={()=>Done(todo.id)}>Mark as Done</button>
       </li>
 ))}
 
@@ -91,7 +124,9 @@ export default function TodoList(){
 
 
    <button onClick={UpperCaseAll}>UpperCase</button>
-
+   &nbsp;
+   &nbsp;
+      <button onClick={AllDone}>Mark as All done</button>
 
     </div>
 
