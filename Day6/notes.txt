@@ -147,7 +147,8 @@ like if state variable m kuch changes ki basis pe side effects
       return prevCount+1;
     })
   }
-   let increaseCountY = ()=>{
+
+  let increaseCountY = ()=>{
     setCountY((prevCount)=>{
       return prevCount+1;
     })
