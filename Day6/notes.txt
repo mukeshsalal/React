@@ -1,0 +1,211 @@
+
+
+About Form in React
+
+ let [userName,setUserName] = useState("");
+
+    let handleNameChange = (event)=>{
+        console.log(event.target.value);
+        setFullName(event.target.value);
+    };
+
+    <input type="text" placeholder="Enter full name" value={fullName} onChange={handleNameChange} id="fullname"/>
+
+
+To handle Multiple Inputs use Make Common Function to handle All
+
+
+    let [formData,setFormData] = useState({fullName:"",userName:"",passWord:""});
+
+
+    let  handleInputChange = (event)=>{
+
+        let fieldName = event.target.name;
+        let newValue = event.target.value;
+        // console.log(fieldName);
+        // console.log(newValue);
+
+        setFormData((currData)=>{
+            // currData[fieldName] = newValue;
+            return {...currData,[fieldName]:newValue};
+
+        });
+
+
+
+    };
+
+    let handleSubmit = (event)=>{
+        event.preventDefault();
+        setFormData({
+         fullName:"",
+         userName:"",
+         passWord:"",
+        });
+
+    }
+
+
+return(
+    <>
+        <form onSubmit={handleSubmit}>
+
+        <label htmlFor="fullname">Enter Full Name</label>
+        &nbsp;
+        <input type="text" placeholder="Enter full name" value={formData.fullName} onChange={handleInputChange} id="fullname" name="fullName"/>
+<br/> <br/>
+
+         <label htmlFor="userName">Enter UserName</label>
+        <input type="text" placeholder="Enter Username name" value={formData.userName} onChange={handleInputChange} id="userName" name="userName"/>
+<br/> <br/>
+
+         <label htmlFor="passWord">Enter Password</label>
+        <input type="password" placeholder="Enter Password" value={formData.passWord} onChange={handleInputChange} id="passWord" name="passWord"/>
+<br/> <br/>
+
+
+       <button>Submit</button>
+
+        </form>
+        </>
+);
+
+
+
+
+Validations for form: (Formik)
+
+npm install formik 
+
+import { useState } from "react";
+import { useFormik } from 'formik';
+
+const validate =  (values) => {
+      let errors = {};
+      if (!values.userName) {
+        errors.userName = "Username is required";
+      }
+      if (values.rating < 1 || values.rating > 5) {
+        errors.rating = "Rating must be between 1 and 5";
+      }
+      return errors;
+    
+}
+
+export default function CommentForm({addNewComment}){
+
+ const formik = useFormik({
+    initialValues: {
+      userName: '',
+      rating: 5,
+      remarks: ''
+    },
+    validate,
+    onSubmit:()=>{
+     alert(JSON.stringify(values,null,2));
+    },
+});
+
+
+return(
+  <>
+
+  <h4>Give a Feedback</h4>
+
+  <form onSubmit={formik.handleSubmit}>
+  <input type="text" placeholder="username" value={formik.values.userName}name="userName" onChange={formik.handleChange} />
+  <br/><br/>
+  {formik.errors.userName?<div>{formik.errors.userName}</div>:null}
+
+  <textarea name="remarks" value={formik.remarks} onChange={formik.values.handleChange} placeholder="remarks"></textarea>
+
+
+  <br/><br/>
+  <input placeholder="Enter rating" type="number" value={formik.values.rating}  name="rating" onChange={formik.handleChange} max={5}/>
+
+  <button type="submit">Submit</button>
+
+  </form>
+
+  </>
+  );
+
+  }
+
+
+
+UseEffect()
+
+Component render us time pe kaam karana hoo we use this hook
+like if state variable m kuch changes ki basis pe side effects
+
+  const [countY, setCountY] = useState(0);
+
+
+  let increaseCountX = ()=>{
+    setCountX((prevCount)=>{
+      return prevCount+1;
+    })
+  }
+   let increaseCountY = ()=>{
+    setCountY((prevCount)=>{
+      return prevCount+1;
+    })
+  }
+
+// Jb bhi render hoga
+//  useEffect(function printSomething(){
+//     console.log("This is side-effect");
+//  });
+  
+
+
+
+// Dependicies in useEffect 
+ 
+ 
+1> (For particular State)
+
+//   useEffect(function printSomething(){
+//     console.log("This is side-effect");
+//},[countX]);
+
+
+2> 1st time render m useEffect kaam krega
+
+//  useEffect(function printSomething(){
+//     console.log("This is side-effect");
+//  },[]);
+
+
+
+UseCases of UseEffect() // Read Docs
+
+API Calls
+
+
+    let [joke,setJoke] = useState({});
+
+ 
+    async function getJokes() {
+        let response =  await fetch(URL);
+        let result =  await response.json();
+        console.log(result);
+        setJoke({setup:result.setup,punchline:result.punchline});
+        
+    }
+ 
+    useEffect(()=>{async function getFirstJoke(){
+
+        let response =  await fetch(URL);
+        let result =  await response.json();
+        console.log(result);
+        setJoke(()=>{
+        return {setup:result.setup,punchline:result.punchline} 
+    });
+
+}
+ getFirstJoke();
+},[]);
+
+
